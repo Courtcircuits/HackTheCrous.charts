@@ -32,4 +32,4 @@ mail:
   smtp_port: "587"
 
 ingress:
-  host: "hack.ratathune.fr"
+  host: "api.hackthecrous.com"
