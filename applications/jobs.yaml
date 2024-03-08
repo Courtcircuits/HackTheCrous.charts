@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hackthecrous-jobs
+  namespace: argocd
+spec:
+  Project: HackTheCrous
+  Source:
+    repoURL: 'https://github.com/Courtcircuits/HackTheCrous.charts'
+    path: jobs
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+        - tag.yaml
+  Destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: hackthecrous
+  SyncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+

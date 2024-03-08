@@ -1,0 +1,8 @@
+image:
+  repository: "milou666/hackthecrous-front"
+
+frontend:
+  port: 80
+
+ingress:
+  host: "hackthecrous.ratathune.fr"
