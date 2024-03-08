@@ -4,7 +4,7 @@ metadata:
   name: hackthecrous-jobs
   namespace: argocd
 spec:
-  Project: HackTheCrous
+  Project: hackthecrous
   Source:
     repoURL: 'https://github.com/Courtcircuits/HackTheCrous.charts'
     path: jobs
