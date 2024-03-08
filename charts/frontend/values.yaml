@@ -1,5 +1,5 @@
 image:
-  repository: "milou666/hackthecrous-front"
+  repository: "milou666/hackthecrous"
 
 frontend:
   port: 80
