@@ -7,7 +7,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hackthecrous-front
+      app: {{ .Release.Name }}-deployment
   template:
     metadata:
       labels:
