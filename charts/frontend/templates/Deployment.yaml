@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: hackthecrous-front
+        app: {{ .Release.Name }}-deployment
     spec:
       containers:
       - name: hackthecrous-front
