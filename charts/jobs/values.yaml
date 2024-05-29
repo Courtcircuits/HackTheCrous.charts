@@ -3,9 +3,10 @@ jobs:
   command: "up"
 - name: "get-restaurants"
   command: "restaurants"
+
 database:
   user: "postgres"
-  host: "hackthecrous-services-postgresql.hackthecrous.svc.cluster.local"
+  host: 'hackthecrous-services-postgresql.hackthecrous.svc.cluster.local'
   port: "5432"
   name: "hackthecrous"
   secretName: "htc-secret"
