@@ -5,6 +5,7 @@ metadata:
   name: {{ .Release.Name }}-service
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   selector:
     app: {{ .Release.Name }}-deployment
