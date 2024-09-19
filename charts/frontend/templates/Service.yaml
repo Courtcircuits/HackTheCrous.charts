@@ -3,6 +3,8 @@ kind: Service
 metadata:
   namespace: {{ .Release.Namespace }}
   name: {{ .Release.Name }}-service
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
 spec:
   selector:
     app: {{ .Release.Name }}-deployment
