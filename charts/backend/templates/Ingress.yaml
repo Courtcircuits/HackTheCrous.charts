@@ -4,6 +4,9 @@ metadata:
   name: {{ .Release.Name }}-ingress
   labels:
     name: {{ .Release.Name }}-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+
 spec:
   rules:
   - host: {{ .Values.ingress.host }}
@@ -14,5 +17,5 @@ spec:
         backend:
           service:
             name: {{ .Release.Name }}-service
-            port: 
+            port:
               number: {{ .Values.service.externalPort }}
