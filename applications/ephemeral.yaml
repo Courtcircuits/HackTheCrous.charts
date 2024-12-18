@@ -19,3 +19,37 @@ spec:
     automated:
       prune: true
       selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ephemeral-applicationset
+  namespace: services
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - list:
+        elements:
+          - values: values.yaml
+            version: latest
+  template:
+    metadata:
+      name: "{{ .version }}"
+      namespace: services
+    spec:
+      project: hackthecrous
+      source:
+        repoUrl: "https://github.com/Courtcircuits/HackTheCrous.charts"
+        path: charts/ephemeral
+        targetRevision: HEAD
+        helm:
+          valueFiles:
+            - "{{ .values }}"
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: hackthecrous
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
