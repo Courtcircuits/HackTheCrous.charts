@@ -17,7 +17,7 @@ apps:
         postinstall: false # just for tests
         env_var:
           - name: "PG_DATABASE"
-            value: "hackthecrous-latest"
+            value: "htclatest"
           - name: "PG_HOST"
             value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
           - name: "PG_PORT"
