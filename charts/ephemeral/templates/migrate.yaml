@@ -24,7 +24,7 @@ spec:
         env:
         {{- range .env_var}}
           - name: {{ .name }}
-            value: {{ .value }}
+            value: {{ .value | quote }}
         {{- end}}
         {{- range .secrets}}
           - name: {{ .name }}
