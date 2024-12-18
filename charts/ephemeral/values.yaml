@@ -13,19 +13,20 @@ apps:
       - name: "create-database"
         image: "milou666/hackthecrous-utilities:latest"
         command: "bootstrap"
-        preinstall: true
+        preinstall: false # just for tests
+        postinstall: false # just for tests
         env_var:
           - name: "PG_DATABASE"
-            value: "hackthecrous"
+            value: "hackthecrous-latest"
           - name: "PG_HOST"
-            value: "0.0.0.0"
+            value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
           - name: "PG_PORT"
             value: "5432"
           - name: "PG_USER"
             value: "postgres"
           - name: "PGPASSWORD"
             value: "postgres"
-        command: ["./create_preview.sh", "database"]
+        command: ["./create_preview.sh"]
     secrets:
       - name: "PG_PASSWORD"
         key: "postgres-password"

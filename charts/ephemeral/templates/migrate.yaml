@@ -21,6 +21,7 @@ spec:
       - name: {{ $release.Name }}-{{ .name}}
         image: "milou666/hackthecrous-crawler:{{ $values.image.tag }}"
         command: ["node", "dist/index.js", {{ .command | quote }}]
+        imagePullPolicy: Always
         env:
         {{- range .env_var}}
           - name: {{ .name }}

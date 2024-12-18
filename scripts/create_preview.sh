@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV_NAME="$1"
+ENV_NAME="$PG_DATABASE"
 
 echo "Creating database $ENV_NAME"
 
