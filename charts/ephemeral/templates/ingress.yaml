@@ -23,5 +23,6 @@ spec:
             backend:
               service:
                 name: {{ $.Release.Name }}-{{ .name }}-service
-                port: {{ .port | int }}
+                port:
+                  number: {{ .port | int }}
 {{- end}}
