@@ -6,14 +6,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $release.Name }}-{{ .name }}-{{ $values.sha }}-deployment
+  name: {{ $release.Name }}-{{ .name }}-deployment
   namespace: {{ $release.Namespace }}
   labels:
     chart: "{{ $chart.Name }}-{{ $chart.Version | replace "+" "-" }}"
 spec:
   selector:
     matchLabels:
-      app: {{ $release.Name }}
+      app: {{ $release.Name }}-deployment
   replicas: 1
   template:
     metadata:

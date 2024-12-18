@@ -13,7 +13,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: {{ $.Release.Name }}-{{ .name }}-{{ $.Values.sha }}-deployment
+    app: {{ $.Release.Name }}-{{ .name }}-deployment
   ports:
     - protocol: TCP
       port: {{ .port }}
