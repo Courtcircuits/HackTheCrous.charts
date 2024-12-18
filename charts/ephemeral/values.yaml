@@ -12,7 +12,6 @@ apps:
     jobs:
       - name: "create-database"
         image: "milou666/hackthecrous-utilities:latest"
-        command: "bootstrap"
         preinstall: false # just for tests
         postinstall: false # just for tests
         env_var:
@@ -27,6 +26,14 @@ apps:
           - name: "PGPASSWORD"
             value: "postgres"
         command: ["./create_preview.sh"]
+      - name: "migrate"
+        image: "milou666/hackthecrous-crawler:0.0.1-rc1"
+        preinstall: false # just for tests
+        postinstall: false # just for tests
+        env_var:
+          - name: "DATABASE_URL"
+            value: "postgres://postgres:postgres@hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local:5432/htclatest"
+        command: ["./create_preview.sh"]
     secrets:
       - name: "PG_PASSWORD"
         key: "postgres-password"
@@ -35,9 +42,9 @@ apps:
       - name: "PORT"
         value: "80"
       - name: "PG_DATABASE"
-        value: "hackthecrous"
+        value: "htclatest"
       - name: "PG_HOST"
-        value: "0.0.0.0"
+        value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
       - name: "PG_PORT"
         value: "5432"
       - name: "PG_USER"
