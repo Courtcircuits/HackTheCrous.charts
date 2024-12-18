@@ -1,22 +1,24 @@
 {{- $values := .Values -}}
-{{- range $.Values.apps}}
+{{- $release := .Release -}}
+{{- $chart := .Chart -}}
+{{- range $values.apps}}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: {{ $.Release.Name }}-{{ .name }}-{{ $.Values.sha }}-deployment
-    namespace: {{ $.Release.Namespace }}
+  name: {{ $release.Name }}-{{ .name }}-{{ $values.sha }}-deployment
+  namespace: {{ $release.Namespace }}
   labels:
-    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version | replace "+" "-" }}"
+    chart: "{{ $chart.Name }}-{{ $chart.Version | replace "+" "-" }}"
 spec:
   selector:
     matchLabels:
-      app: {{ $.Release.Name }}
+      app: {{ $release.Name }}
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{ $.Release.Name }}-deployment
+        app: {{ $release.Name }}-deployment
     spec:
       containers:
         - name: {{ .name }}
@@ -33,7 +35,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .secret }}
-                  key: {{ .keyRef }}
+                  key: {{ .key }}
           {{- end}}
           livenessProbe:
             httpGet:

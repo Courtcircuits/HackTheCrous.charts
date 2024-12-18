@@ -10,9 +10,22 @@ apps:
     tag: "latest"
     hostname: "api"
     jobs:
-      - name: "bootstrap-tables"
+      - name: "create-database"
+        image: "milou666/hackthecrous-utilities:latest"
         command: "bootstrap"
-        env_var
+        preinstall: true
+        env_var:
+          - name: "PG_DATABASE"
+            value: "hackthecrous"
+          - name: "PG_HOST"
+            value: "0.0.0.0"
+          - name: "PG_PORT"
+            value: "5432"
+          - name: "PG_USER"
+            value: "postgres"
+          - name: "PGPASSWORD"
+            value: "postgres"
+        command: ["./create_preview.sh", "database"]
     secrets:
       - name: "PG_PASSWORD"
         key: "postgres-password"

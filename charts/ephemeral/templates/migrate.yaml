@@ -6,6 +6,14 @@ kind: Job
 metadata:
   name: {{ $release.Name }}-{{ .name}}
   namespace: {{ $release.Namespace }}
+  {{ if .preinstall }}
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+  {{ end }}
+  {{ if .postdelete }}
+  annotations:
+    argocd.argoproj.io/hook: PostDelete
+  {{ end }}
 spec:
   template:
     spec:
@@ -14,8 +22,17 @@ spec:
         image: "milou666/hackthecrous-crawler:{{ $values.image.tag }}"
         command: ["node", "dist/index.js", {{ .command | quote }}]
         env:
-        - name: DATABASE_URL
-          value: ""
+        {{- range .env_var}}
+          - name: {{ .name }}
+            value: {{ .value }}
+        {{- end}}
+        {{- range .secrets}}
+          - name: {{ .name }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .secret }}
+                key: {{ .key }}
+        {{- end}}
       restartPolicy: Never
   backoffLimit: 4
 ---
