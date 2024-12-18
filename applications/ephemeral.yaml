@@ -40,7 +40,7 @@ spec:
     spec:
       project: hackthecrous
       source:
-        repoUrl: "https://github.com/Courtcircuits/HackTheCrous.charts"
+        repoURL: "https://github.com/Courtcircuits/HackTheCrous.charts"
         path: charts/ephemeral
         targetRevision: HEAD
         helm:
