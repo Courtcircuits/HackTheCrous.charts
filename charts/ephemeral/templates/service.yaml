@@ -4,7 +4,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $.Release.Name }}-{{ .name }}-{{ $values.sha }}-service
+  name: {{ $.Release.Name }}-{{ .name }}-service
   namespace: {{ $.Release.Namespace }}
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ .hostname }}{{ $values.sha }}.{{ $values.root_domain }}
