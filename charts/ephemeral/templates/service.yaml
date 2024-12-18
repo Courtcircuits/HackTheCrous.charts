@@ -18,5 +18,5 @@ spec:
     - protocol: TCP
       port: {{ .port }}
       targetPort: {{ .targetPort }}
-      name: HTTP
+      name: http
 {{- end}}

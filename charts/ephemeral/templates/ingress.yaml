@@ -23,5 +23,5 @@ spec:
             backend:
               service:
                 name: {{ $.Release.Name }}-{{ .name }}-{{ $values.sha }}-service
-                port: {{ .port }}
+                port: http
 {{- end}}
