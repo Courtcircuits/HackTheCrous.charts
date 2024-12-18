@@ -1,10 +1,11 @@
 {{- $values := .Values -}}
 {{- $release := .Release -}}
-{{- range $.Values.jobs}}
+{{- range $.Values.apps}}
+{{- range .jobs}}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $release.Name }}-{{ .name}}
+  name: {{ $release.Name }}-{{ .name }}
   namespace: {{ $release.Namespace }}
   {{ if .preinstall }}
   annotations:
@@ -19,7 +20,7 @@ spec:
     spec:
       containers:
       - name: {{ $release.Name }}-{{ .name}}
-        image: "milou666/hackthecrous-crawler:{{ $values.image.tag }}"
+        image: {{ .image }}
         command: ["node", "dist/index.js", {{ .command | quote }}]
         imagePullPolicy: Always
         env:
@@ -37,4 +38,5 @@ spec:
       restartPolicy: Never
   backoffLimit: 4
 ---
+{{- end}}
 {{- end}}
