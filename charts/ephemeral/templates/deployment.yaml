@@ -13,12 +13,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{ $release.Name }}-deployment
+      app: {{ $release.Name }}-{{ .name }}-deployment
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{ $release.Name }}-deployment
+        app: {{ $release.Name }}-{{ .name }}-deployment
     spec:
       containers:
         - name: {{ .name }}

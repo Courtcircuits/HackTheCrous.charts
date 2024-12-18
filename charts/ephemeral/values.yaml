@@ -1,4 +1,4 @@
-sha: latest
+sha: latest # same
 
 root_domain: "hackthecrous.com"
 
@@ -7,7 +7,7 @@ apps:
     port: 80
     targetPort: 80
     image: "milou666/hackthecrous-back"
-    tag: "latest"
+    tag: "latest" # same
     hostname: "api"
     jobs:
       - name: "create-database"
@@ -17,7 +17,7 @@ apps:
         postinstall: false # just for tests
         env_var:
           - name: "PG_DATABASE"
-            value: "htclatest"
+            value: "htclatest" # warning explicit tag
           - name: "PG_HOST"
             value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
           - name: "PG_PORT"
@@ -46,5 +46,5 @@ apps:
     port: 80
     targetPort: 80
     image: "milou666/hackthecrous-front"
-    tag: "latest"
+    tag: "latest" # same
     hostname: ""
