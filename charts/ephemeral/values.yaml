@@ -12,10 +12,11 @@ apps:
     jobs:
       - name: "bootstrap-tables"
         command: "bootstrap"
+        env_var
     secrets:
       - name: "PG_PASSWORD"
-        key: "hackthecrous-frontend-secret"
-        secret: "hackthecrous-frontend-secret"
+        key: "postgres-password"
+        secret: "hackthecrous-ephemeral-postgresql"
     env_var:
       - name: "PORT"
         value: "80"
