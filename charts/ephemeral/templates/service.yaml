@@ -1,0 +1,22 @@
+{{- $values := .Values -}}
+{{- range $values.apps}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}-{{ $values.sha }}-service
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .hostname }}{{ $values.sha }}.{{ $values.root_domain }}
+  labels:
+    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version | replace "+" "-" }}"
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ $.Release.Name }}-{{ .name }}-{{ $.Values.sha }}-deployment
+  ports:
+    - protocol: TCP
+      port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      name: HTTP
+{{- end}}

@@ -1,0 +1,27 @@
+{{- $values := .Values -}}
+{{- range $values.apps}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}-{{ $values.sha }}-ingress
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    traefik.ingress.kubernetes.io/redirection-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+  labels:
+    name: {{ $.Release.Name }}-{{ .name }}-{{ $values.sha }}-ingress
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: {{ .hostname }}{{ $values.sha }}.{{ $values.root_domain }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Release.Name }}-{{ .name }}-{{ $values.sha }}-service
+                port: {{ .port }}
+{{- end}}

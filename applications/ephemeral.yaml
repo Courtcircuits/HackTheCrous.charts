@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hackthecrous-ephemeral
+  namespace: services
+spec:
+  project: hackthecrous
+  source:
+    repoURL: "https://github.com/Courtcircuits/HackTheCrous.charts"
+    path: charts/ephemeral_services
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: hackthecrous
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

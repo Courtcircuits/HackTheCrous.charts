@@ -1,0 +1,29 @@
+sha: latest
+
+root_domain: "hackthecrous.com"
+
+apps:
+  - name: "preview-backend"
+    port: 80
+    targetPort: 80
+    image: "milou666/hackthecrous-back"
+    tag: "latest"
+    hostname: "api"
+    jobs:
+      - name: "bootstrap-tables"
+        command: "bootstrap"
+    secrets:
+      - name: "PG_PASSWORD"
+        key: "hackthecrous-frontend-secret"
+        secret: "hackthecrous-frontend-secret"
+    env_var:
+      - name: "PORT"
+        value: "80"
+      - name: "PG_DATABASE"
+        value: "hackthecrous"
+      - name: "PG_HOST"
+        value: "0.0.0.0"
+      - name: "PG_PORT"
+        value: "5432"
+      - name: "PG_USER"
+        value: "postgres"

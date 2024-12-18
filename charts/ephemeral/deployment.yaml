@@ -1,0 +1,8 @@
+{{- $values := .Values -}}
+{{- range $.apps}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values }}
+{{- end}}

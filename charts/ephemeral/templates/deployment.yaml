@@ -1,0 +1,46 @@
+{{- $values := .Values -}}
+{{- range $.Values.apps}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ $.Release.Name }}-{{ .name }}-{{ $.Values.sha }}-deployment
+    namespace: {{ $.Release.Namespace }}
+  labels:
+    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version | replace "+" "-" }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{ $.Release.Name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ $.Release.Name }}-deployment
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: {{ .image }}:{{ .tag }}
+          ports:
+            - containerPort: {{ .port }}
+          env:
+          {{- range .env_var}}
+            - name: {{ .name }}
+              value: {{ .value }}
+          {{- end}}
+          {{- range .secrets}}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secret }}
+                  key: {{ .keyRef }}
+          {{- end}}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .port | int }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .port | int }}
+{{- end}}
