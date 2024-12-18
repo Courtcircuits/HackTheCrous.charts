@@ -33,7 +33,7 @@ apps:
         env_var:
           - name: "DATABASE_URL"
             value: "postgres://postgres:postgres@hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local:5432/htclatest"
-        command: ["./create_preview.sh"]
+        command: ["/bin/crawler", "bootstrap"]
     secrets:
       - name: "PG_PASSWORD"
         key: "postgres-password"
