@@ -21,7 +21,7 @@ spec:
       containers:
       - name: {{ $release.Name }}-{{ .name}}
         image: {{ .image }}
-        command: ["node", "dist/index.js", {{ .command | quote }}]
+        command: {{ .command }}
         imagePullPolicy: Always
         env:
         {{- range .env_var}}
