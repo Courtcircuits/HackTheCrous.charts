@@ -13,23 +13,9 @@ spec:
             - name: "{{ .Release.Name }}-update-meals"
               image: "milou666/hackthecrous-crawler:{{ .Values.image.tag }}"
               command:
-                - node 
-                - dist/index.js
+                - /bin/crawler 
                 - meals
               env:
                 - name: DATABASE_URL
-                  value: ""
-                - name: PG_DATABASE
-                  value: {{ .Values.database.name | quote }}
-                - name: PG_USER
-                  value: {{ .Values.database.user | quote }}
-                - name: PG_HOST
-                  value: {{ .Values.database.host | quote }}
-                - name: PG_PORT
-                  value: {{ .Values.database.port | quote }}
-                - name: PG_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: {{ .Values.database.secretName }}
-                      key: postgresql-password
+                  value: {{ .Values.database.url | quote }}
           restartPolicy: OnFailure
