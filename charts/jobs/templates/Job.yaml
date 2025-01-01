@@ -15,7 +15,7 @@ spec:
         command: ["/bin/crawler", {{ .command | quote }}]
         env:
         - name: DATABASE_URL
-  "dist/index.js"         value: {{ $values.database.url | quote }}
+          value: {{ $values.database.url | quote }}
       restartPolicy: Never
   backoffLimit: 4
 ---
