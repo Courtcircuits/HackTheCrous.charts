@@ -23,7 +23,7 @@ spec:
         image: {{ .image }}
         command:
           {{- range .command}}
-          - {{ . }}
+          {{ . }}
           {{- end}}
         imagePullPolicy: Always
         env:
