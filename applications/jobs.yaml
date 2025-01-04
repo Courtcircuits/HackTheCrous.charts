@@ -16,3 +16,7 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: hackthecrous
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
