@@ -17,6 +17,8 @@ spec:
                 - -p
                 - meals
               env:
+                - name: RUST_LOG
+                  value: "info"
                 - name: DATABASE_URL
                   value: {{ .Values.database.url | quote }}
                 - name: LOKI_ENDPOINT
