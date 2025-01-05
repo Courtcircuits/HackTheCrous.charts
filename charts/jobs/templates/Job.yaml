@@ -12,10 +12,14 @@ spec:
       containers:
       - name: {{ $release.Name }}-{{ .name}}
         image: "milou666/hackthecrous-crawler:{{ $values.image.tag }}"
-        command: ["/bin/crawler", {{ .command | quote }}]
+        command: ["/bin/crawler", "-p", {{ .command | quote }}]
         env:
+        - name: RUST_LOG
+          value: "info"
         - name: DATABASE_URL
           value: {{ $values.database.url | quote }}
+        - name: LOKI_ENDPOINT
+          value: {{ $values.observability.loki | quote }}
       restartPolicy: Never
   backoffLimit: 4
 ---
