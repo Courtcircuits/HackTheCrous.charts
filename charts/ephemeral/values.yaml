@@ -3,55 +3,55 @@ sha: latest # same
 root_domain: "hackthecrous.com"
 
 apps:
-  - name: "preview-backend"
-    port: 80
-    targetPort: 80
-    image: "milou666/hackthecrous-back"
-    tag: "latest" # same
-    hostname: "api"
-    jobs:
-      - name: "create-database"
-        image: "milou666/hackthecrous-utilities:latest"
-        preinstall: false # just for tests
-        postinstall: false # just for tests
-        env_var:
-          - name: "PG_DATABASE"
-            value: "htclatest" # warning explicit tag
-          - name: "PG_HOST"
-            value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
-          - name: "PG_PORT"
-            value: "5432"
-          - name: "PG_USER"
-            value: "postgres"
-          - name: "PGPASSWORD"
-            value: "postgres"
-        command: ["./create_preview.sh"]
-      - name: "migrate"
-        image: "milou666/hackthecrous-crawler:0.0.1-rc1"
-        preinstall: false # just for tests
-        postinstall: false # just for tests
-        env_var:
-          - name: "DATABASE_URL"
-            value: "postgres://postgres:postgres@hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local:5432/htclatest"
-        command: ["/bin/crawler", "bootstrap"]
-    secrets:
-      - name: "PG_PASSWORD"
-        key: "postgres-password"
-        secret: "hackthecrous-ephemeral-postgresql"
-    env_var:
-      - name: "PORT"
-        value: "80"
-      - name: "PG_DATABASE"
-        value: "htclatest"
-      - name: "PG_HOST"
-        value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
-      - name: "PG_PORT"
-        value: "5432"
-      - name: "PG_USER"
-        value: "postgres"
-  - name: "preview-frontend"
-    port: 80
-    targetPort: 80
-    image: "milou666/hackthecrous-front"
-    tag: "latest" # same
-    hostname: ""
+  # - name: "preview-backend"
+  #   port: 80
+  #   targetPort: 80
+  #   image: "milou666/hackthecrous-back"
+  #   tag: "latest" # same
+  #   hostname: "api"
+  #   jobs:
+  #     - name: "create-database"
+  #       image: "milou666/hackthecrous-utilities:latest"
+  #       preinstall: false # just for tests
+  #       postinstall: false # just for tests
+  #       env_var:
+  #         - name: "PG_DATABASE"
+  #           value: "htclatest" # warning explicit tag
+  #         - name: "PG_HOST"
+  #           value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
+  #         - name: "PG_PORT"
+  #           value: "5432"
+  #         - name: "PG_USER"
+  #           value: "postgres"
+  #         - name: "PGPASSWORD"
+  #           value: "postgres"
+  #       command: ["./create_preview.sh"]
+  #     - name: "migrate"
+  #       image: "milou666/hackthecrous-crawler:0.0.1-rc1"
+  #       preinstall: false # just for tests
+  #       postinstall: false # just for tests
+  #       env_var:
+  #         - name: "DATABASE_URL"
+  #           value: "postgres://postgres:postgres@hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local:5432/htclatest"
+  #       command: ["/bin/crawler", "bootstrap"]
+  #   secrets:
+  #     - name: "PG_PASSWORD"
+  #       key: "postgres-password"
+  #       secret: "hackthecrous-ephemeral-postgresql"
+  #   env_var:
+  #     - name: "PORT"
+  #       value: "80"
+  #     - name: "PG_DATABASE"
+  #       value: "htclatest"
+  #     - name: "PG_HOST"
+  #       value: "hackthecrous-ephemeral-postgresql.hackthecrous.svc.cluster.local"
+  #     - name: "PG_PORT"
+  #       value: "5432"
+  #     - name: "PG_USER"
+  #       value: "postgres"
+  # - name: "preview-frontend"
+  #   port: 80
+  #   targetPort: 80
+  #   image: "milou666/hackthecrous-front"
+  #   tag: "latest" # same
+  #   hostname: ""
