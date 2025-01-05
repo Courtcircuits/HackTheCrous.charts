@@ -8,4 +8,4 @@ database:
   url: "postgres://postgres:postgres@hackthecrous-services-postgresql.hackthecrous.svc.cluster.local/hackthecrous"
 
 observability:
-  loki: "http://loki-headless:3100.hackthecrous.svc.cluster.local"
+  loki: "http://loki-headless.hackthecrous.svc.cluster.local:3100."
