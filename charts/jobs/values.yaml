@@ -6,3 +6,6 @@ jobs:
 
 database:
   url: "postgres://postgres:postgres@hackthecrous-services-postgresql.hackthecrous.svc.cluster.local/hackthecrous"
+
+observability:
+  loki: "loki-memberlist.hackthecrous.svc.cluster.local"

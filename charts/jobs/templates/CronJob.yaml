@@ -14,8 +14,11 @@ spec:
               image: "milou666/hackthecrous-crawler:{{ .Values.image.tag }}"
               command:
                 - /bin/crawler 
+                - -p
                 - meals
               env:
                 - name: DATABASE_URL
                   value: {{ .Values.database.url | quote }}
+                - name: LOKI_ENDPOINT
+                  value: {{ .Values.observability.loki | quote }}
           restartPolicy: OnFailure
