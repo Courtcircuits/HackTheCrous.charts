@@ -1,6 +1,6 @@
 service:
-  internalPort: 4000
-  externalPort: 4000
+  internalPort: 3000
+  externalPort: 3000
 
 image:
   repository: "milou666/hackthecrous-back"
@@ -8,7 +8,7 @@ image:
 replicaCount: 1
 
 clientUrl: "http://localhost:3000"
-fullServerUrl: "http://localhost:4000"
+fullServerUrl: "http://localhost:3000"
 googleAuthSecretName: "htc-secret"
 hashRound: "10"
 jwtSecretName: "htc-secret"
@@ -24,7 +24,7 @@ redis:
   host: "hackthecrous-redis-master.hackthecrous.svc.cluster.local"
   port: "7652"
 
-serverUrl: "http://localhost:4000"
+serverUrl: "http://localhost:3000"
 mail:
   mail_address: "hackthecrus@gmail.com"
   smtp_host: "smtp.gmail.com"
