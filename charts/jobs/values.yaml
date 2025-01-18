@@ -3,6 +3,8 @@ jobs:
     command: "up"
   - name: "get-restaurants"
     command: "restaurants"
+  - name: "get-schools"
+    command: "schools"
 
 database:
   url: "postgres://postgres:postgres@hackthecrous-services-postgresql.hackthecrous.svc.cluster.local/hackthecrous"
