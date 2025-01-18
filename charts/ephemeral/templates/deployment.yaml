@@ -39,10 +39,10 @@ spec:
           {{- end}}
           livenessProbe:
             httpGet:
-              path: /
+              path: /up
               port: {{ .port | int }}
           readinessProbe:
             httpGet:
-              path: /
+              path: /up
               port: {{ .port | int }}
 {{- end}}
