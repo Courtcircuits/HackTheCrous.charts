@@ -22,29 +22,8 @@ spec:
         ports:
         - containerPort: {{ .Values.service.internalPort | int }}
         env:
-          - name: CLIENT_URL
-            value: {{ .Values.clientUrl | quote }}
-          - name: FULL_SERVER_URL
-            value: {{ .Values.fullServerUrl | quote }}
-          - name: GOOGLE_AUTH_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.googleAuthSecretName }}
-                key: google_auth_secret
-          - name: GOOGLE_AUTH_CLIENT_ID
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.googleAuthSecretName }}
-                key: google_auth_client_id
-          - name: HASH_ROUND
-            value: {{ .Values.hashRound | quote }}
           - name: PORT
             value: {{ .Values.service.internalPort | quote }}
-          - name: JWT_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.jwtSecretName }}
-                key: jwt_secret
           - name: PG_DATABASE
             value: {{ .Values.postgresql.database }}
           - name: PG_HOST
@@ -58,24 +37,7 @@ spec:
             value: {{ .Values.postgresql.port | quote }}
           - name: PG_USER
             value: {{ .Values.postgresql.username | quote }}
-          - name: REDISHOST
-            value: {{ .Values.redis.host | quote }}
-          - name: REDISPORT
-            value: {{ .Values.redis.port | quote }}
           - name: SERVER_URL
             value: {{ .Values.serverUrl | quote }}
-          - name: MAIL_SMTP
-            value: {{ .Values.mail.mail_address | quote }}
-          - name: SMTP_HOST
-            value: {{ .Values.mail.smtp_host | quote }}
-          - name: MAIL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.mail.secretName }}
-                key: mail-password
-          - name: SMTP_PORT
-            value: {{ .Values.mail.smtp_port | quote }}
-          - name: TEMPLATE_PATH
-            value: "./template/mail.html"
 
     
