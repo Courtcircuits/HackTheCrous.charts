@@ -32,7 +32,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.postgresql.secretName }}
-                key: postgresql-password
+                key: postgres-password
           - name: PG_PORT
             value: {{ .Values.postgresql.port | quote }}
           - name: PG_USER
