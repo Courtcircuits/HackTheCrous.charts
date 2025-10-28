@@ -16,7 +16,7 @@ jwtSecretName: "htc-secret"
 postgresql:
   database: "hackthecrous"
   host: "hackthecrous-services-postgresql.hackthecrous.svc.cluster.local"
-  secretName: "htc-secret"
+  secretName: "hackthecrous-services-postgresql"
   port: "5432"
   username: "postgres"
 
